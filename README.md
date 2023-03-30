@@ -13,7 +13,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] Add phpstan
 - [ ] Add phpunit
 - [x] Add php-cs-fixer
-- [ ] Add phpmd
+- [x] Add phpmd
 - [ ] Add rector
 - [ ] Add a basic Makefile
 - [ ] Add a basic .env file

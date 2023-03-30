@@ -6,7 +6,6 @@ setup-certs:
 
 start: dstop dup s_directories
 
-
 dup:
 	docker-compose --env-file .docker.env up -d
 
@@ -25,3 +24,8 @@ s_directories:
 	mkdir -p ./var/cache ./var/log ./var/sessions
 	sudo chmod -R 777 ./var
 
+php-cs-fixer:
+		docker exec --env-file .docker.env illuvatar-php-1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=.php-cs-fixer.php
+
+php-cs-fixer-check:
+		docker exec --env-file .docker.env illuvatar-php-1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=.php-cs-fixer.php --dry-run

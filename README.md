@@ -12,7 +12,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add psalm 
 - [ ] Add phpstan
 - [ ] Add phpunit
-- [ ] Add php-cs-fixer
+- [x] Add php-cs-fixer
 - [ ] Add phpmd
 - [ ] Add rector
 - [ ] Add a basic Makefile

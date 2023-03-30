@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   php:
+    container_name: "${PROJECT_NAME}_php"
     build:
         context: ./.dev/docker/php
         dockerfile: Dockerfile
@@ -14,13 +15,16 @@ services:
     depends_on:
       - mailhog
       - db
+        
   mailhog:
+    container_name: "${PROJECT_NAME}_mailhog"
     env_file:
       - ./.docker.env
     image: mailhog/mailhog
     ports:
       - "${DOCKER_MAILHOG_PORT}:8025"
   db:
+    container_name: "${PROJECT_NAME}_db"
     env_file:
       - ./.docker.env
     image: mysql:8.0
@@ -38,6 +42,7 @@ services:
       - "${DOCKER_DB_PORT}:3306"
 
   db-test:
+    container_name: "${PROJECT_NAME}_db-test"
     env_file:
       - ./.docker.env
     image: mysql:8.0

@@ -20,3 +20,5 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add basic hexagonal directory structure
 - [ ] Add a basic symfony setup
 - [ ] Add test generator
+- [ ] Add redis
+- [ ] Add redis insights

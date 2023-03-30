@@ -10,7 +10,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] Add .editorconfig
 - [ ] Add .gitattributes
 - [ ] Add psalm 
-- [ ] Add phpstan
+- [x] Add phpstan
 - [ ] Add phpunit
 - [x] Add php-cs-fixer
 - [ ] Add phpmd

@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  php:
+    build:
+        context: ./.dev/docker/php
+        dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    environment:
+      - XDEBUG_CONFIG=remote_host=host.docker.internal
+      - DOCKER_PHP_APACHE_DOCUMENT_ROOT="${DOCKER_PHP_APACHE_DOCUMENT_ROOT}"
+    ports:
+      - "${DOCKER_PHP_PORT}:80"
+    depends_on:
+      - mailhog
+      - db
+  mailhog:
+    env_file:
+      - ./.docker.env
+    image: mailhog/mailhog
+    ports:
+      - "${DOCKER_MAILHOG_PORT}:8025"
+  db:
+    env_file:
+      - ./.docker.env
+    image: mysql:8.0
+    working_dir: /application
+    restart: on-failure
+    command: [ mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb-file-per-table=1, --lower_case_table_names=1 ]
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=app
+      - MYSQL_USER=app
+      - MYSQL_PASSWORD=secret
+    ports:
+      - "${DOCKER_DB_PORT}:3306"
+
+  db-test:
+    env_file:
+      - ./.docker.env
+    image: mysql:8.0
+    working_dir: /application
+    restart: on-failure
+    command: [ mysqld, --character-set-server=utf8mb4, --innodb_flush_sync=0, --innodb_log_buffer_size=512M, --slow-query-log=0, --innodb_flush_log_at_trx_commit=0, --collation-server=utf8mb4_unicode_ci, --innodb_buffer_pool_size=512m --innodb-file-per-table=1, --lower_case_table_names=1 ]
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret-test
+      - MYSQL_DATABASE=app-test
+      - MYSQL_USER=app-test
+      - MYSQL_PASSWORD=secret-test
+    ports:
+      - "${DOCKER_DB_TEST_PORT}:3306"
+    tmpfs:
+      - /var/lib/mysql
+
+volumes:
+    db:
+    mailhog:

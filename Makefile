@@ -25,10 +25,13 @@ s_directories:
 	sudo chmod -R 777 ./var
 
 php-cs-fixer:
-		docker exec --env-file .docker.env illuvatar-php-1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=.php-cs-fixer.php
+		docker exec --env-file .docker.env illuvatar-php-1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php
 
 php-cs-fixer-check:
-		docker exec --env-file .docker.env illuvatar-php-1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=.php-cs-fixer.php --dry-run
+		docker exec --env-file .docker.env illuvatar-php-1 ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
 
 phpstan:
 		docker exec --env-file .docker.env illuvatar-php-1 ./vendor/bin/phpstan analyse -c phpstan.neon src tests
+
+phpmd:
+		docker exec --env-file .docker.env illuvatar-php-1 ./vendor/bin/phpmd src github phpmd-ruleset.xml

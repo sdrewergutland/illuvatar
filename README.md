@@ -7,7 +7,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] Add a basic docker setup
 - [x] Add a basic docker-compose setup
 - [x] Add .editorconfig
-- [ ] Add psalm 
+- [x] Add psalm 
 - [x] Add phpstan
 - [ ] Add phpunit
 - [x] Add php-cs-fixer
@@ -20,3 +20,5 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add test generator
 - [ ] Add redis
 - [ ] Add redis insights
+- [ ] PHPStorm File Templates
+- [ ] Use host user for docker

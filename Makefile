@@ -52,4 +52,7 @@ phpmd:
 psalm:
 	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/psalm
 
+phpunit:
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit
+
 

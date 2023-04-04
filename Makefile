@@ -24,6 +24,9 @@ ddown:
 dstop:
 	docker-compose --env-file .docker.env stop
 
+attach:
+	docker exec -it --env-file .docker.env ${PROJECT_NAME}_php bash
+
 #add a make command that will make sure all directories for symfony exist and are writable
 
 s_directories:
@@ -45,3 +48,8 @@ phpstan:
 
 phpmd:
 	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpmd src github phpmd-ruleset.xml
+
+psalm:
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/psalm
+
+

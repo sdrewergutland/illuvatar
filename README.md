@@ -6,9 +6,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 
 - [x] Add a basic docker setup
 - [x] Add a basic docker-compose setup
-- [ ] Add a basic docker-sync setup
 - [x] Add .editorconfig
-- [ ] Add .gitattributes
 - [ ] Add psalm 
 - [x] Add phpstan
 - [ ] Add phpunit

@@ -9,12 +9,12 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] Add .editorconfig
 - [x] Add psalm 
 - [x] Add phpstan
-- [ ] Add phpunit
+- [x] Add phpunit
 - [x] Add php-cs-fixer
 - [x] Add phpmd
 - [ ] Add rector
-- [ ] Add a basic Makefile
-- [ ] Add a basic .env file
+- [x] Add a basic Makefile
+- [x] Add a basic .env file
 - [ ] Add basic hexagonal directory structure
 - [ ] Add a basic symfony setup
 - [ ] Add test generator
@@ -22,3 +22,4 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add redis insights
 - [ ] PHPStorm File Templates
 - [ ] Use host user for docker
+- [ ] Xdebug

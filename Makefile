@@ -52,7 +52,19 @@ phpmd:
 psalm:
 	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/psalm
 
-phpunit:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit
+phpunit: phpunit-unit phpunit-functional phpunit-application
+
+phpunit-coverage:
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --coverage-html ./var/coverage
+
+phpunit-unit:
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --testsuite unit
+
+phpunit-functional:
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --testsuite functional
+
+phpunit-application:
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --testsuite application
+
 
 

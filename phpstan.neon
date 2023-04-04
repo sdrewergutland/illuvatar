@@ -1,5 +1,5 @@
 parameters:
-    tmpDir: tools/phpstan/.phpstan-cache
+    tmpDir: .dev/tools/phpstan/.phpstan-cache
     level: 9
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml

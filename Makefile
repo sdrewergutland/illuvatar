@@ -28,16 +28,17 @@ dstop:
 
 s_directories:
 	mkdir -p ./var/cache ./var/log ./var/sessions
-	sudo chmod -R 777 ./var
+	sudo chmod -R 777 ./var .dev/tools/phpstan/.phpstan-cache
 
 composer-install:
 	docker exec --env-file .docker.env ${PROJECT_NAME}_php composer install
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php composer install --working-dir=./.dev/tools/php-cs-fixer
 
 php-cs-fixer:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php
 
 php-cs-fixer-check:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
+	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
 
 phpstan:
 	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpstan analyse -c phpstan.neon src tests

@@ -19,4 +19,4 @@ return $config->setRules([
     'single_line_throw' => false,
 ])
     ->setFinder($finder)
-    ->setCacheFile('tools/php-cs-fixer/.php-cs-fixer.cache');
+    ->setCacheFile('.dev/tools/php-cs-fixer/.php-cs-fixer.cache');

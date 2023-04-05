@@ -1,5 +1,7 @@
 include .docker.env
 
+Arguments := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+
 setup-certs:
 	#openssl genrsa -des3 -out ./.dev/nginx/certs/root-ca.key 2048
 	#openssl req -x509 -new -nodes -key ./.dev/nginx/certs/root-ca.key -sha256 -days 1024 -out ./.dev/nginx/certs/root-ca.pem
@@ -25,46 +27,60 @@ dstop:
 	docker-compose --env-file .docker.env stop
 
 attach:
-	docker exec -it --env-file .docker.env ${PROJECT_NAME}_php bash
+	docker exec -it --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} bash
 
 #add a make command that will make sure all directories for symfony exist and are writable
 
 s_directories:
-	mkdir -p ./var/cache ./var/log ./var/sessions
+	mkdir -p ./var/cache ./var/log ./var/sessions ./var/xdebug
 	sudo chmod -R 777 ./var .dev/tools/phpstan/.phpstan-cache
 
 composer-install:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php composer install
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php composer install --working-dir=./.dev/tools/php-cs-fixer
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} composer install
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} composer install --working-dir=./.dev/tools/php-cs-fixer
 
 php-cs-fixer:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php
 
 php-cs-fixer-check:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
 
 phpstan:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpstan analyse -c phpstan.neon src tests
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpstan analyse -c phpstan.neon src tests
 
 phpmd:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpmd src github phpmd-ruleset.xml
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpmd src github phpmd-ruleset.xml
 
 psalm:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/psalm
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/psalm
 
 phpunit: phpunit-unit phpunit-functional phpunit-application
 
 phpunit-coverage:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --coverage-html ./var/coverage
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --coverage-html ./var/coverage
 
 phpunit-unit:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --testsuite unit
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite unit
 
 phpunit-functional:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --testsuite functional
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite functional
 
 phpunit-application:
-	docker exec --env-file .docker.env ${PROJECT_NAME}_php ./vendor/bin/phpunit --testsuite application
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite application
 
+debug-on:
+	bash ./.dev/docker/scripts/xdebug.sh debug
 
+debug-off:
+	bash ./.dev/docker/scripts/xdebug.sh off
 
+profiler-on:
+	bash ./.dev/docker/scripts/xdebug.sh profile
+
+profiler-off: debug-off
+
+debug:
+	bash ./.dev/docker/scripts/xdebug.sh $(Arguments)
+
+%::
+	@true

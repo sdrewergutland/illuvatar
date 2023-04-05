@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   php:
-    container_name: "${PROJECT_NAME}_php"
+    container_name: "${PROJECT_NAME}${DOCKER_PHP_CONTAINER_NAME_SUFFIX}"
     build:
         context: ./.dev/docker/php
         dockerfile: Dockerfile

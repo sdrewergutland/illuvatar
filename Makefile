@@ -76,3 +76,6 @@ trace-on:
 	bash ./.dev/docker/scripts/xdebug.sh trace
 
 trace-off: debug-off
+
+cache-clear:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console cache:clear

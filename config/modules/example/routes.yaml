@@ -1,0 +1,5 @@
+controllers:
+    resource:
+        path: ../../../src/Example/Infrastructure/WebApi/Controller/
+        namespace: App\Example\Infrastructure\WebApi\Controller
+    type: attribute

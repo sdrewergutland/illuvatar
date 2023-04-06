@@ -29,3 +29,5 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Prepare custom types for value objects with doctrine
 - [ ] Example module
 - [ ] Example symfony profiler
+- [ ] Share phpstorm dictionary
+- [ ] Add i18n

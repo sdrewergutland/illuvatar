@@ -2,36 +2,31 @@ include .docker.env
 
 Arguments := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
-setup-certs:
-	#openssl genrsa -des3 -out ./.dev/nginx/certs/root-ca.key 2048
-	#openssl req -x509 -new -nodes -key ./.dev/nginx/certs/root-ca.key -sha256 -days 1024 -out ./.dev/nginx/certs/root-ca.pem
-	#sudo openssl req -new -sha256 -nodes -out app.csr -newkey rsa:2048 -keyout ./.dev/nginx/certs/app.key
-	#sudo openssl x509 -req -in ./.dev/nginx/certs/app.csr -CA ./.dev/nginx/certs/root-ca.pem -CAkey ./.dev/nginx/certs/root-ca.key -CAcreateserial -out ./.dev/nginx/certs/app.crt -days 730 -sha256 -extfile ./.dev/nginx/certs/app.ext
+.PHONY: init start docker-up docker-build docker-config docker-down docker-stop attach init_directories composer-install php-cs-fixer php-cs-fixer-check phpstan phpmd psalm phpunit phpunit-coverage phpunit-unit phpunit-functional phpunit-application debug-on debug-off profiler-on profiler-off debug
 
-setup: dbuild start s_directories composer-install
-start: dstop dup
+init: docker-build start init_directories composer-install
 
-dup:
+start: docker-stop docker-up
+
+docker-up:
 	docker-compose --env-file .docker.env up -d
 
-dbuild:
+docker-build:
 	docker-compose --env-file .docker.env build
 
-dconfig:
+docker-config:
 	docker-compose --env-file .docker.env config
 
-ddown:
+docker-down:
 	docker-compose --env-file .docker.env down
 
-dstop:
+docker-stop:
 	docker-compose --env-file .docker.env stop
 
 attach:
 	docker exec -it --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} bash
 
-#add a make command that will make sure all directories for symfony exist and are writable
-
-s_directories:
+init_directories:
 	mkdir -p ./var/cache ./var/log ./var/sessions ./var/xdebug
 	sudo chmod -R 777 ./var .dev/tools/phpstan/.phpstan-cache
 

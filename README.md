@@ -28,3 +28,4 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Commit hooks / pre-commit
 - [ ] Prepare custom types for value objects with doctrine
 - [ ] Example module
+- [ ] Example symfony profiler

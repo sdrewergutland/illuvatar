@@ -26,5 +26,5 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Dependabot
 - [ ] Commit message checking
 - [ ] Commit hooks / pre-commit
-- [ ] Prepare embeddable value objects with doctrine
+- [ ] Prepare custom types for value objects with doctrine
 - [ ] Example module

@@ -22,7 +22,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add redis insights
 - [ ] PHPStorm File Templates
 - [ ] Use host user for docker
-- [ ] Xdebug
+- [x] Xdebug
 - [ ] Dependabot
 - [ ] Commit message checking
 - [ ] Commit hooks / pre-commit

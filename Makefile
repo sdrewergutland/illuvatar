@@ -1,7 +1,5 @@
 include .docker.env
 
-Arguments := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-
 .PHONY: init start docker-up docker-build docker-config docker-down docker-stop attach init_directories composer-install php-cs-fixer php-cs-fixer-check phpstan phpmd psalm phpunit phpunit-coverage phpunit-unit phpunit-functional phpunit-application debug-on debug-off profiler-on profiler-off debug
 
 init: docker-build start init_directories composer-install
@@ -74,8 +72,7 @@ profiler-on:
 
 profiler-off: debug-off
 
-debug:
-	bash ./.dev/docker/scripts/xdebug.sh $(Arguments)
+trace-on:
+	bash ./.dev/docker/scripts/xdebug.sh trace
 
-%::
-	@true
+trace-off: debug-off

@@ -1,3 +1,11 @@
+doctrine:
+    orm:
+        mappings:
+            ModuleExampleDomain:
+                type: attribute
+                prefix: App\Example\Domain
+                dir: "%kernel.project_dir%/src/Example/Domain"
+
 services:
     _defaults:
         autowire: true
@@ -8,3 +16,12 @@ services:
         resource: '../../../src/Example/Infrastructure/WebApi/Controller'
         public: true
         tags: [ 'controller.service_arguments' ]
+        
+    App\Example\Application\UseCase\:
+        resource: '../../../src/Example/Application/UseCase/*/*Handler.php'
+        
+    App\Example\Application\ExampleApplication: ~
+    App\Example\Application\ExampleApplicationInterface: '@App\Example\Application\ExampleApplication'
+    
+    App\Example\Infrastructure\Sql\ORMExampleRepository: ~
+    App\Example\Domain\Example\ExampleRepository: '@App\Example\Infrastructure\Sql\ORMExampleRepository'

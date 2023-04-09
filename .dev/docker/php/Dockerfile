@@ -8,7 +8,7 @@ RUN apt-get -y update && apt-get -y install \
     unzip
 
 #xdebug
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN pecl install xdebug  && docker-php-ext-enable xdebug
 RUN mkdir -p /usr/local/etc/xdebug
 COPY ./etc/ /usr/local/etc/xdebug/
 COPY ./etc/xdebug-off.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -16,3 +16,5 @@ COPY ./etc/xdebug-off.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN a2enmod rewrite
 COPY ./etc/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./etc/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+
+RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql

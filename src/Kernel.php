@@ -13,7 +13,6 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-
     protected function configureContainer(
         ContainerConfigurator $container,
         LoaderInterface $loader,
@@ -42,6 +41,4 @@ class Kernel extends BaseKernel
             $routes->import($fileName, 'annotation');
         }
     }
-
-
 }

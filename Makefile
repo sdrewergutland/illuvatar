@@ -79,3 +79,14 @@ trace-off: debug-off
 
 cache-clear:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console cache:clear
+
+cache-warmup:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console cache:warmup
+
+restore-filemode:
+	git status --porcelain | grep "^A" | cut -c 4- | xargs sudo chmod a+w
+
+console-migrations:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console doctrine:migrations:diff --no-interaction
+
+pre-commit: php-cs-fixer phpstan psalm phpunit

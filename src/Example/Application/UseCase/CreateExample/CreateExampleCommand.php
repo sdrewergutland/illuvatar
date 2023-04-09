@@ -6,5 +6,4 @@ use App\Shared\Application\Command\Command;
 
 class CreateExampleCommand implements Command
 {
-
 }

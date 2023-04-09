@@ -53,13 +53,13 @@ phpunit-coverage:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --coverage-html ./var/coverage
 
 phpunit-unit:
-	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite unit
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite Unit
 
 phpunit-functional:
-	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite functional
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite Functional
 
 phpunit-application:
-	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite application
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./vendor/bin/phpunit --testsuite Application
 
 debug-on:
 	bash ./.dev/docker/scripts/xdebug.sh debug

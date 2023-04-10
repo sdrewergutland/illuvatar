@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\FunctionalSuite\Example\Infrastructure\Sql;
 
 use App\Example\Domain\Example\Example;
+use App\Example\Domain\Example\ExampleName;
 use App\Example\Domain\Example\ExampleNotFoundException;
 use App\Example\Domain\Example\ExampleRepository;
 use App\Example\Infrastructure\Sql\ORMExampleRepository as Subject;
@@ -46,7 +47,7 @@ class OrmExampleRepositoryTest extends FunctionalTestCase
     {
         $entity = new Example(
             id: Uuid::v4(),
-            name: 'test'
+            name: ExampleName::fromString('Example name')
         );
 
         $this->subject->save($entity);

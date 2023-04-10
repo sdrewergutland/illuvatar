@@ -2,6 +2,7 @@
 
 namespace App\Example\Domain\Example;
 
+use App\Example\Infrastructure\Sql\Type\ExampleNameType;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
@@ -11,10 +12,10 @@ class Example
     #[ORM\Id, ORM\Column(type: 'uuid', unique: true)]
     private readonly Uuid $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $name;
+    #[ORM\Column(type: ExampleNameType::TYPE, length: 255)]
+    private ExampleName $name;
 
-    public function __construct(Uuid $id, string $name)
+    public function __construct(Uuid $id, ExampleName $name)
     {
         $this->id = $id;
         $this->name = $name;
@@ -25,7 +26,7 @@ class Example
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ExampleName
     {
         return $this->name;
     }

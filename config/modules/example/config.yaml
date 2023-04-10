@@ -1,4 +1,7 @@
 doctrine:
+    dbal:
+        types:
+          app_module_example_example_name: App\Example\Infrastructure\Sql\Type\ExampleNameType
     orm:
         mappings:
             ModuleExampleDomain:

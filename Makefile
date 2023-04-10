@@ -84,7 +84,7 @@ cache-warmup:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console cache:warmup
 
 restore-filemode:
-	git status --porcelain | grep "^A" | cut -c 4- | xargs sudo chmod a+w
+	git status --porcelain | grep -E "^(M| M)" | awk '{print $$2}' | xargs sudo chmod a+w
 
 console-migrations:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console doctrine:migrations:diff --no-interaction

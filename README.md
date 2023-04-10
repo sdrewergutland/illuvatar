@@ -20,7 +20,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add test generator
 - [ ] Add redis
 - [ ] Add redis insights
-- [ ] PHPStorm File Templates
+- [x] PHPStorm File Templates
 - [ ] Use host user for docker
 - [x] Xdebug
 - [ ] Dependabot

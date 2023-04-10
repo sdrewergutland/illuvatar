@@ -18,3 +18,5 @@ COPY ./etc/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY ./etc/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 
 RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
+
+RUN pecl install redis && docker-php-ext-enable redis

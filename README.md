@@ -16,10 +16,9 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] Add a basic Makefile
 - [x] Add a basic .env file
 - [ ] Add basic hexagonal directory structure
-- [ ] Add a basic symfony setup
 - [ ] Add test generator
-- [ ] Add redis
-- [ ] Add redis insights
+- [x] Add redis
+- [x] Add redis insights
 - [x] PHPStorm File Templates
 - [ ] Use host user for docker
 - [x] Xdebug
@@ -28,6 +27,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Commit hooks / pre-commit
 - [ ] Prepare custom types for value objects with doctrine
 - [ ] Example module
-- [ ] Example symfony profiler
+- [x] Symfony profiler
 - [ ] Share phpstorm dictionary
 - [ ] Add i18n
+- [ ] Add example for cache usage

@@ -17,6 +17,8 @@ services:
     depends_on:
       - mailhog
       - db
+      - db-test
+      - redis
         
   mailhog:
     container_name: "${PROJECT_NAME}_mailhog"
@@ -60,7 +62,31 @@ services:
       - "${DOCKER_DB_TEST_PORT}:3306"
     tmpfs:
       - /var/lib/mysql
+        
+  redis:
+    image: redis:7
+    container_name: "${PROJECT_NAME}_redis"
+    restart: on-failure
+    ports:
+      - "${DOCKER_REDIS_PORT}:6379"
+    volumes:
+      - ./.dev/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: [ redis-server, /usr/local/etc/redis/redis.conf ]
+
+  redis-gui:
+    image: redislabs/redisinsight:latest
+    container_name: "${PROJECT_NAME}_redis_insight"
+    restart: on-failure
+    volumes:
+      - redis_insight:/db
+    ports:
+      - "${DOCKER_REDIS_INSIGHT_PORT}:8001"
+    links:
+      - redis:redis
+    depends_on:
+      - redis
 
 volumes:
     db:
     mailhog:
+    redis_insight:

@@ -22,9 +22,9 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] PHPStorm File Templates
 - [ ] Use host user for docker
 - [x] Xdebug
-- [ ] Dependabot
-- [ ] Commit message checking
-- [ ] Commit hooks / pre-commit
+- [x] Dependabot
+- [x] Commit message checking
+- [x] Commit hooks / pre-commit
 - [ ] Prepare custom types for value objects with doctrine
 - [ ] Example module
 - [x] Symfony profiler

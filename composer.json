@@ -29,6 +29,7 @@
         "phpstan/phpstan-webmozart-assert": "^1.2",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^5.0",
+        "ramsey/conventional-commits": "^1.5",
         "symfony/browser-kit": "6.2.*",
         "symfony/css-selector": "6.2.*",
         "symfony/phpunit-bridge": "^6.2",

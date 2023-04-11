@@ -1,0 +1,75 @@
+{
+  "config": {
+    "fail-on-first-error": false,
+    "verbosity": "verbose",
+    "ansi-colors": true,
+    "run-mode": "docker",
+    "run-exec": "docker exec illuvatar_php",
+    "run-path": "/var/www/html/vendor/bin/captainhook"
+  },
+  "commit-msg": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "\\Ramsey\\CaptainHook\\ValidateConventionalCommit",
+        "config": {
+          "typeCase": "lower",
+          "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert", "build", "ci"],
+          "scopeCase": "camel",
+          "scopeRequired": true,
+          "scopes": ["dev", "module-example"],
+          "descriptionCase": "pascal",
+          "descriptionEndMark": null,
+          "bodyRequired": false,
+          "bodyWrapWidth": null,
+          "requiredFooters": []
+        }
+      }
+    ]
+  },
+  "pre-push": {
+    "enabled": false,
+    "actions": []
+  },
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php",
+        "options": []
+      },
+      {
+        "action": "./vendor/bin/phpstan analyse -c phpstan.neon src tests",
+        "options": []
+      },
+      {
+        "action": "./vendor/bin/psalm",
+        "options": []
+      },
+      {
+        "action": "./vendor/bin/phpunit",
+        "options": []
+      }
+    ]
+  },
+  "prepare-commit-msg": {
+    "enabled": true,
+    "actions": []
+  },
+  "post-commit": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-merge": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-checkout": {
+    "enabled": false,
+    "actions": []
+  },
+  "post-rewrite": {
+    "enabled": false,
+    "actions": []
+  }
+}

@@ -21,6 +21,7 @@
     "require-dev": {
         "captainhook/captainhook": "^5.16",
         "captainhook/plugin-composer": "^5.3",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpmd/phpmd": "^2.13",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-doctrine": "^1.3",

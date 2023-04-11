@@ -25,7 +25,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [x] Dependabot
 - [x] Commit message checking
 - [x] Commit hooks / pre-commit
-- [ ] Prepare custom types for value objects with doctrine
+- [x] Prepare custom types for value objects with doctrine
 - [ ] Example module
 - [x] Symfony profiler
 - [ ] Share phpstorm dictionary

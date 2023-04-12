@@ -6,7 +6,7 @@ namespace App\Tests\Resources\Fixture\Example;
 
 use App\Example\Domain\Example\Example as SubjectEntity;
 use App\Example\Domain\Example\ExampleName;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use App\Tests\Library\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Uid\UuidV4;
 
@@ -21,5 +21,15 @@ final class ExampleFixture extends Fixture
 
         $manager->persist($subjectEntity);
         $manager->flush();
+
+        $this->setReference(__CLASS__, $subjectEntity);
+    }
+
+    public function getDefaultReference(): SubjectEntity
+    {
+        $reference =  $this->getReference(__CLASS__);
+        \assert($reference instanceof SubjectEntity);
+
+        return $reference;
     }
 }

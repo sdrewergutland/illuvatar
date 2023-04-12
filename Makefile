@@ -90,3 +90,6 @@ console-migrations:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console doctrine:migrations:diff --no-interaction
 
 pre-commit: php-cs-fixer phpstan psalm phpunit
+
+create-test-base-dump:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} .dev/tools/create-base-dump.sh

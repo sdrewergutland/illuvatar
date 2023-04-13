@@ -10,7 +10,10 @@ use App\Example\Domain\Example\ExampleNotFoundException;
 use App\Example\Domain\Example\ExampleRepository;
 use App\Example\Infrastructure\Sql\ORMExampleRepository as Subject;
 use App\Tests\Library\Extension\EntityManagerAwareTestTrait;
+use App\Tests\Library\Extension\SetupAwareTrait;
 use App\Tests\Library\FunctionalTestCase;
+use App\Tests\Resources\Fixture\Example\AnotherExampleFixture;
+use App\Tests\Resources\Fixture\Example\ExampleFixture;
 use Symfony\Component\Uid\Uuid;
 
 /**
@@ -21,6 +24,7 @@ use Symfony\Component\Uid\Uuid;
 class OrmExampleRepositoryTest extends FunctionalTestCase
 {
     use EntityManagerAwareTestTrait;
+    use SetupAwareTrait;
 
     private Subject $subject;
 
@@ -37,6 +41,22 @@ class OrmExampleRepositoryTest extends FunctionalTestCase
         $this->assertSame(
             $this->subject,
             self::getContainer()->get(ExampleRepository::class)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function itFindsEntities(): void
+    {
+        $this->testCaseSetup()
+            ->mustLoadFixture(ExampleFixture::class)
+            ->mustLoadFixture(AnotherExampleFixture::class)
+            ->run()
+        ;
+
+        $this->assertNotNull(
+            $this->subject->findOneById(ExampleFixture::getDefaultReference()->getId())
         );
     }
 

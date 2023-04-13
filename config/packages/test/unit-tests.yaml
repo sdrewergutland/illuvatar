@@ -9,3 +9,16 @@ services:
         resource: '../../../tests/Resources/Fixture'
         public: true
     
+    App\Tests\Library\Extension\SetupRunner:
+        public: true
+        
+    App\Tests\Library\Extension\FixtureLoader:
+        arguments:
+            $container: '@test.service_container'
+
+    App\Tests\Library\Extension\SqlDatabaseInitializer:
+        arguments:
+            $truncateSqlFile: '%kernel.project_dir%/tests/Resources/Sql/base.default.truncate.sql'
+            $dataSqlFile: '%kernel.project_dir%/tests/Resources/Sql/base.default.data.sql'
+            $structureSqlFile: '%kernel.project_dir%/tests/Resources/Sql/base.default.structure.sql'
+            

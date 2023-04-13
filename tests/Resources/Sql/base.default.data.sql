@@ -1,0 +1,3 @@
+SET FOREIGN_KEY_CHECKS=0;START TRANSACTION;
+INSERT INTO `doctrine_migration_versions` VALUES ('DoctrineMigrations\\Version20230409044201','2023-04-13 10:40:20',4);
+COMMIT;

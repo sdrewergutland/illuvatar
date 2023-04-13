@@ -11,4 +11,6 @@ interface ExampleRepository
     public function save(Example $example): void;
 
     public function mustFindOneById(Uuid $id): Example;
+
+    public function findOneById(Uuid $id): ?Example;
 }

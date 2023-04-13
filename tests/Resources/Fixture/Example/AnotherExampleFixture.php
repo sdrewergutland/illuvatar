@@ -6,11 +6,12 @@ namespace App\Tests\Resources\Fixture\Example;
 
 use App\Example\Domain\Example\Example as SubjectEntity;
 use App\Example\Domain\Example\ExampleName;
+use App\Tests\Library\Extension\DependentFixtureInterface;
 use App\Tests\Library\Extension\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\UuidV4;
 
-final class ExampleFixture extends Fixture
+final class AnotherExampleFixture extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $manager
@@ -36,5 +37,12 @@ final class ExampleFixture extends Fixture
         \assert($reference instanceof SubjectEntity);
 
         return $reference;
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            ExampleFixture::class,
+        ];
     }
 }

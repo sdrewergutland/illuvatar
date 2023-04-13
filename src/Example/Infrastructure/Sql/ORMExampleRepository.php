@@ -36,4 +36,9 @@ class ORMExampleRepository extends ServiceEntityRepository implements ExampleRep
 
         return $example;
     }
+
+    public function findOneById(Uuid $id): ?Example
+    {
+        return $this->find($id);
+    }
 }

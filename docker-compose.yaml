@@ -38,10 +38,10 @@ services:
     volumes:
       - db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=app
-      - MYSQL_USER=app
-      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=${DOCKER_DB_DATABASE_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DOCKER_DB_DATABASE_NAME}
+      - MYSQL_USER=${DOCKER_DB_DATABASE_USER}
+      - MYSQL_PASSWORD=${DOCKER_DB_DATABASE_PASSWORD}
     ports:
       - "${DOCKER_DB_PORT}:3306"
 
@@ -54,10 +54,10 @@ services:
     restart: on-failure
     command: [ mysqld, --character-set-server=utf8mb4, --innodb_flush_sync=0, --innodb_log_buffer_size=512M, --slow-query-log=0, --innodb_flush_log_at_trx_commit=0, --collation-server=utf8mb4_unicode_ci, --innodb_buffer_pool_size=512m --innodb-file-per-table=1, --lower_case_table_names=1 ]
     environment:
-      - MYSQL_ROOT_PASSWORD=secret-test
-      - MYSQL_DATABASE=app-test
-      - MYSQL_USER=app-test
-      - MYSQL_PASSWORD=secret-test
+      - MYSQL_ROOT_PASSWORD=${DOCKER_DB_TEST_DATABASE_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DOCKER_DB_TEST_DATABASE_USER}
+      - MYSQL_USER=${DOCKER_DB_TEST_DATABASE_USER}
+      - MYSQL_PASSWORD=${DOCKER_DB_TEST_DATABASE_PASSWORD}
     ports:
       - "${DOCKER_DB_TEST_PORT}:3306"
     tmpfs:

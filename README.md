@@ -31,4 +31,4 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Share phpstorm dictionary
 - [ ] Add i18n
 - [ ] Add example for cache usage
-- [ ] Remove doctrine fixtures bundle
+- [x] Remove doctrine fixtures bundle

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Library\Extension;
+namespace App\Tests\Library\Extension\Fixture;
 
 class ReferenceRegistry
 {

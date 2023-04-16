@@ -6,7 +6,7 @@ namespace App\Tests\Resources\Fixture\Example;
 
 use App\Example\Domain\Example\Example as SubjectEntity;
 use App\Example\Domain\Example\ExampleName;
-use App\Tests\Library\Extension\Fixture;
+use App\Tests\Library\Extension\Fixture\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\UuidV4;
 

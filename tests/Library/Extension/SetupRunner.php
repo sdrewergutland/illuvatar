@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Library\Extension;
 
+use App\Tests\Library\Extension\Fixture\FixtureLoader;
+use App\Tests\Library\Extension\Fixture\ReferenceRegistry;
+
 final class SetupRunner
 {
     public function __construct(

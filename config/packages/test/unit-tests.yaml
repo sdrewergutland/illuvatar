@@ -10,7 +10,7 @@ services:
     
     App\Tests\Library\Extension\SetupRunner: ~
         
-    App\Tests\Library\Extension\FixtureLoader:
+    App\Tests\Library\Extension\Fixture\FixtureLoader:
         arguments:
             $container: '@test.service_container'
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Library\Extension;
 
+use App\Tests\Library\Extension\Fixture\Fixture;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class TestCaseSetup

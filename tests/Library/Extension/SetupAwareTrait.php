@@ -6,7 +6,7 @@ trait SetupAwareTrait
 {
     abstract protected static function getContainer(): \Symfony\Component\DependencyInjection\ContainerInterface;
 
-    private function testCaseSetup(): TestCaseSetup
+    protected function testCaseSetup(): TestCaseSetup
     {
         return TestCaseSetup::create(self::getContainer());
     }

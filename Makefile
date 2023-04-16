@@ -86,9 +86,11 @@ cache-warmup:
 restore-filemode:
 	git status --porcelain | grep -E "^(M| M)" | awk '{print $$2}' | xargs sudo chmod a+w
 
-console-migrations:
+console-migrations-diff:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console doctrine:migrations:diff --no-interaction
 
+console-migrations-migrate:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console doctrine:migrations:migrate --no-interaction
 pre-commit: php-cs-fixer phpstan psalm phpunit
 
 create-test-base-dump:

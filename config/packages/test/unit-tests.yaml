@@ -2,20 +2,20 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: false
+        public: true
     
     
     App\Tests\Resources\Fixture\:
         resource: '../../../tests/Resources/Fixture'
-        public: true
     
-    App\Tests\Library\Extension\SetupRunner:
-        public: true
+    App\Tests\Library\Extension\SetupRunner: ~
         
     App\Tests\Library\Extension\FixtureLoader:
         arguments:
             $container: '@test.service_container'
 
+    App\Tests\Library\Extension\Request\RequestBuilder: ~
+    
     App\Tests\Library\Extension\SqlDatabaseInitializer:
         arguments:
             $truncateSqlFile: '%kernel.project_dir%/tests/Resources/Sql/base.default.truncate.sql'

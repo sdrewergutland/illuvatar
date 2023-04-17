@@ -97,4 +97,17 @@ create-test-base-dump:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} .dev/tools/create-base-dump.sh
 
 console-api-generate-docs:
-	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console nelmio:apidoc:dump --format=json > tests/Resources/private-api-v1.json
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console nelmio:apidoc:dump --format=json > tests/Resources/api.json
+
+generate-ts-schema-from-api-docs: console-api-generate-docs
+	docker run -it --rm -v ${PWD}:/app -u $$(id -u ${USER}):$$(id -g ${USER}) -w /app/.dev/tools/openapi-typescript node:19 bash -c \
+		"npm install && npx \
+			openapi-typescript /app/tests/Resources/api.json \
+			--output /app/tests/Resources/api-schema.ts \
+			--export-type=true \
+			--make-paths-enum=true \
+			--path-params-as-types=false \
+		"
+	#docker run -it --rm -v ${PWD}:/app -w /app node:12.16.1-alpine sh -c "npm install && npm run generate-ts-schema-from-api-docs"
+t:
+	echo $$(id -u ${USER})

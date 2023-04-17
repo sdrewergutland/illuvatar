@@ -108,6 +108,3 @@ generate-ts-schema-from-api-docs: console-api-generate-docs
 			--make-paths-enum=true \
 			--path-params-as-types=false \
 		"
-	#docker run -it --rm -v ${PWD}:/app -w /app node:12.16.1-alpine sh -c "npm install && npm run generate-ts-schema-from-api-docs"
-t:
-	echo $$(id -u ${USER})

@@ -1,6 +1,7 @@
 include .docker.env
+include .env
 
-.PHONY: init start docker-up docker-build docker-config docker-down docker-stop attach init_directories composer-install php-cs-fixer php-cs-fixer-check phpstan phpmd psalm phpunit phpunit-coverage phpunit-unit phpunit-functional phpunit-application debug-on debug-off profiler-on profiler-off debug
+.PHONY: *
 
 init: docker-build start init_directories composer-install
 
@@ -97,12 +98,12 @@ create-test-base-dump:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} .dev/tools/create-base-dump.sh
 
 console-api-generate-docs:
-	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console nelmio:apidoc:dump --format=json > tests/Resources/api.json
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console nelmio:apidoc:dump --format=json > ${API_SPECIFICATIONS_FILE_PATH}
 
 generate-ts-schema-from-api-docs: console-api-generate-docs
 	docker run -it --rm -v ${PWD}:/app -u $$(id -u ${USER}):$$(id -g ${USER}) -w /app/.dev/tools/openapi-typescript node:19 bash -c \
 		"npm install && npx \
-			openapi-typescript /app/tests/Resources/api.json \
+			openapi-typescript /app/${API_SPECIFICATIONS_FILE_PATH} \
 			--output /app/tests/Resources/api-schema.ts \
 			--export-type=true \
 			--make-paths-enum=true \

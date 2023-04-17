@@ -1,0 +1,2 @@
+parameters:
+    app.shared.infrastructure.api_specifications_file_path: '%kernel.project_dir%/%env(resolve:API_SPECIFICATIONS_FILE_PATH)%'

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\ApplicationSuite\Example;
 
 use App\Tests\Library\ApplicationTestCase;
+use App\Tests\Library\Extension\OpenApiSpecificationTestTrait;
 use App\Tests\Resources\Fixture\Example\ExampleFixture;
 
 /**
@@ -14,6 +15,8 @@ use App\Tests\Resources\Fixture\Example\ExampleFixture;
  */
 final class ReadExampleTest extends ApplicationTestCase
 {
+    use OpenApiSpecificationTestTrait;
+
     /**
      * @test
      */
@@ -24,7 +27,8 @@ final class ReadExampleTest extends ApplicationTestCase
             ->run()
         ;
 
-        $this->createClient()->request(
+        $client = $this->createClient();
+        $client->request(
             ...$this->createRequestBuilder()
                 ->withUri('/example/example/{exampleId}')
                 ->withUriParamInPath('exampleId', (string) ExampleFixture::getDefaultReference()->getId())
@@ -33,5 +37,10 @@ final class ReadExampleTest extends ApplicationTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
+
+        $this->assertMatchesOpenApiSpecification(
+            request: $client->getRequest(),
+            response: $client->getResponse(),
+        );
     }
 }

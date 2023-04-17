@@ -15,6 +15,7 @@
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.2.*",
+        "symfony/psr-http-message-bridge": "^2.1",
         "symfony/runtime": "6.2.*",
         "symfony/uid": "6.2.*",
         "symfony/yaml": "6.2.*"
@@ -22,6 +23,8 @@
     "require-dev": {
         "captainhook/captainhook": "^5.16",
         "captainhook/plugin-composer": "^5.3",
+        "league/openapi-psr7-validator": "^0.21.0",
+        "nyholm/psr7": "^1.6",
         "phpmd/phpmd": "^2.13",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-doctrine": "^1.3",

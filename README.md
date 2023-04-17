@@ -32,3 +32,4 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add i18n
 - [ ] Add example for cache usage
 - [x] Remove doctrine fixtures bundle
+- [x] Add api docs, validation and conversion to typescript

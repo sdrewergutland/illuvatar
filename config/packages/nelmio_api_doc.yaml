@@ -1,0 +1,10 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Illuvatar
+            description: Illuvatar was first
+            version: 1.0.0
+    areas:
+        default:
+            name_patterns:
+                - example_example_read

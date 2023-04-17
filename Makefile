@@ -95,3 +95,6 @@ pre-commit: php-cs-fixer phpstan psalm phpunit
 
 create-test-base-dump:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} .dev/tools/create-base-dump.sh
+
+console-api-generate-docs:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console nelmio:apidoc:dump --format=json > tests/Resources/private-api-v1.json

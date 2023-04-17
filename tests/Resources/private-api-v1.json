@@ -1,0 +1,30 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Illuvatar",
+        "description": "Illuvatar was first",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "\/example\/example\/{exampleId}": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "exampleId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[a-z0-9-]{36}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    }
+}

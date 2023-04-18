@@ -1,3 +1,4 @@
+![test_php workflow](https://github.com/sdrewergutland/illuvatar/actions/workflows/test_php.yml/badge.svg)
 # illuvatar
 
 A basic bootstrap for symfony custom made only for me. Use it, make suggestions - but do not depend on it;)

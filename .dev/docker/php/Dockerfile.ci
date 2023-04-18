@@ -1,0 +1,6 @@
+FROM php:8.2
+
+RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
+RUN apt-get update && apt-get install -y mariadb-client && rm -rf /var/lib/apt
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

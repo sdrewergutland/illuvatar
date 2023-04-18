@@ -10,9 +10,18 @@
         Standard ruleset to get started...
     </description>
 
-    <rule ref="rulesets/cleancode.xml" />
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess" />
+    </rule>
     <rule ref="rulesets/controversial.xml" />
     <rule ref="rulesets/design.xml" />
-    <rule ref="rulesets/naming.xml" />
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable" />
+        <exclude name="LongVariable" />
+    </rule>
     <rule ref="rulesets/unusedcode.xml" />
+
+    <exclude-pattern>*/Sql/Type/*</exclude-pattern>
+    <exclude-pattern>src/Kernel</exclude-pattern>
+
 </ruleset>

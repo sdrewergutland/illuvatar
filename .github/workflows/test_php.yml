@@ -50,7 +50,7 @@ jobs:
                     
             -   name: Run PHPStan
                 run: |
-                    docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpstan analyse -c phpstan.neon src tests
+                    docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpstan --memory-limit 1G analyse -c phpstan.neon src tests
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/psalm
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpmd src github phpmd-ruleset.xml
                     

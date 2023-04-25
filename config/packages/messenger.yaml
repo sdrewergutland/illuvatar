@@ -1,0 +1,26 @@
+framework:
+    messenger:
+        buses:
+            application.command.bus:
+                default_middleware: true
+                middleware:
+        transports:
+            shared_messenger_transport.default:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: default
+                    table_name: '%env(MESSENGER_TRANSPORT_TABLE_NAME)%'
+                    auto_setup: false
+                retry_strategy:
+                    max_retries: 3
+                    delay: 5000
+                    multiplier: 2
+                    max_delay: 0
+            shared_messenger_transport.failure:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: failure
+                    table_name: '%env(MESSENGER_TRANSPORT_TABLE_NAME)%'
+                    auto_setup: false
+        routing:
+            'App\Shared\Application\Command\AsyncCommand': shared_messenger_transport.default   

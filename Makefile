@@ -3,7 +3,7 @@ include .env
 
 .PHONY: *
 
-init: docker-build start init_directories composer-install
+init: docker-build start init_directories composer-install init_messenger_transports
 
 start: docker-stop docker-up
 
@@ -28,6 +28,9 @@ attach:
 init_directories:
 	mkdir -p ./var/cache ./var/log ./var/sessions ./var/xdebug
 	sudo chmod -R 777 ./var .dev/tools/phpstan/.phpstan-cache
+
+init_messenger_transports:
+	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} ./bin/console messenger:setup-transports
 
 composer-install:
 	docker exec --env-file .docker.env ${DOCKER_PHP_CONTAINER_NAME} composer install

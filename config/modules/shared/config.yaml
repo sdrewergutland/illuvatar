@@ -1,2 +1,19 @@
 parameters:
     app.shared.infrastructure.api_specifications_file_path: '%kernel.project_dir%/%env(resolve:API_SPECIFICATIONS_FILE_PATH)%'
+    
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        
+    App\Shared\Infrastructure\Bus\SymfonyCommandBus:
+        public: true
+        arguments:
+            $commandBus: '@application.command.bus'
+    
+    App\Shared\Application\Command\CommandBusInterface: '@App\Shared\Infrastructure\Bus\SymfonyCommandBus'
+    
+    App\Shared\Application\Command\Heartbeat\HeartbeatCommandHandler:
+        tags: [ { name: messenger.message_handler, bus: application.command.bus } ]
+        autoconfigure: false

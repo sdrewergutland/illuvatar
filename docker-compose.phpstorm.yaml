@@ -11,7 +11,7 @@ services:
       - .:/var/www/html
     environment:
       - XDEBUG_CONFIG=remote_host=host.docker.internal
-      - DOCKER_PHP_APACHE_DOCUMENT_ROOT="${DOCKER_PHP_APACHE_DOCUMENT_ROOT}"
+      - DOCKER_PHP_APACHE_DOCUMENT_ROOT="/var/www/html/public"
     ports:
       - "80:80"
     depends_on:

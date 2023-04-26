@@ -16,7 +16,7 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add rector
 - [x] Add a basic Makefile
 - [x] Add a basic .env file
-- [ ] Add basic hexagonal directory structure
+- [x] Add basic hexagonal directory structure
 - [ ] Add test generator
 - [x] Add redis
 - [x] Add redis insights
@@ -34,3 +34,4 @@ A basic bootstrap for symfony custom made only for me. Use it, make suggestions 
 - [ ] Add example for cache usage
 - [x] Remove doctrine fixtures bundle
 - [x] Add api docs, validation and conversion to typescript
+- [ ] Add async command bus with symfony messenger as default implementation

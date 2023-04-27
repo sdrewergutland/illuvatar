@@ -65,7 +65,7 @@ class OrmExampleRepositoryTest extends FunctionalTestCase
      */
     public function itSavesAndFindsEntities(): void
     {
-        $entity = new Example(
+        $entity = Example::create(
             id: ExampleId::random(),
             name: ExampleName::fromString('Example name')
         );
@@ -73,6 +73,8 @@ class OrmExampleRepositoryTest extends FunctionalTestCase
         $this->subject->save($entity);
 
         self::clearEntityManager();
+
+        $entity->releaseDomainEvents();
 
         $this->assertEquals(
             $entity,

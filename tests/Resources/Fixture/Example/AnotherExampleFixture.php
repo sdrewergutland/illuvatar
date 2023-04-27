@@ -20,7 +20,7 @@ final class AnotherExampleFixture extends Fixture implements DependentFixtureInt
 
     public function load(): void
     {
-        $subjectEntity = new SubjectEntity(
+        $subjectEntity = SubjectEntity::create(
             ExampleId::random(),
             ExampleName::fromString(__CLASS__)
         );

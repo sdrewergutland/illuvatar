@@ -4,7 +4,7 @@ namespace App\Example\Domain\Example;
 
 use App\Example\Domain\Example\Event\ExampleCreatedEvent;
 use App\Example\Infrastructure\Sql\Type\ExampleNameType;
-use App\Shared\Domain\DomainEventAwareTrait;
+use App\Shared\Domain\Event\DomainEventAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 

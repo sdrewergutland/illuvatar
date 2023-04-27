@@ -4,10 +4,9 @@ namespace App\Example\Application\UseCase\CreateExample;
 
 use App\Example\Domain\Example\Example;
 use App\Example\Domain\Example\ExampleId;
-use App\Example\Domain\Example\ExampleName;
 use App\Example\Domain\Example\ExampleRepository;
 use App\Shared\Application\Command\CommandHandler;
-use App\Shared\Domain\DomainEventBusInterface;
+use App\Shared\Domain\Event\DomainEventBusInterface;
 
 final readonly class CreateExampleCommandHandler implements CommandHandler
 {
@@ -21,7 +20,7 @@ final readonly class CreateExampleCommandHandler implements CommandHandler
     {
         $example = Example::create(
             id: ExampleId::random(),
-            name: ExampleName::fromString($command->getName()),
+            name: $command->getName(),
         );
 
         $this->exampleRepository->save($example);

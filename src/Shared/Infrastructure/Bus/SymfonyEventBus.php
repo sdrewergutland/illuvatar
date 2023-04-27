@@ -2,8 +2,8 @@
 
 namespace App\Shared\Infrastructure\Bus;
 
-use App\Shared\Domain\DomainEvent;
-use App\Shared\Domain\DomainEventBusInterface;
+use App\Shared\Domain\Event\DomainEvent;
+use App\Shared\Domain\Event\DomainEventBusInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final readonly class SymfonyEventBus implements DomainEventBusInterface
@@ -13,6 +13,9 @@ final readonly class SymfonyEventBus implements DomainEventBusInterface
     ) {
     }
 
+    /**
+     * @param DomainEvent|DomainEvent[] $domainEvents
+     */
     public function publish(DomainEvent|array $domainEvents): void
     {
         if (!is_array($domainEvents)) {

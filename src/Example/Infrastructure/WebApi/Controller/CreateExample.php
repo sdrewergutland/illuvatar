@@ -18,7 +18,9 @@ final class CreateExample extends AbstractController
     )]
     public function __invoke(ExampleApplicationInterface $exampleApplication, Request $request): Response
     {
+        // @todo: Replace with a DTO and symfony validation
         $data = json_decode($request->getContent(), true);
+        assert(is_array($data) && isset($data['name']) && is_string($data['name']));
 
         return $this->json(
             $exampleApplication->createExample(

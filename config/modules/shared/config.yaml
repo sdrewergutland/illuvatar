@@ -28,4 +28,4 @@ services:
         arguments:
             $eventBus: '@domain.event.bus'   
         
-    App\Shared\Domain\DomainEventBusInterface: '@App\Shared\Infrastructure\Bus\SymfonyEventBus'
+    App\Shared\Domain\Event\DomainEventBusInterface: '@App\Shared\Infrastructure\Bus\SymfonyEventBus'

@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Shared\Domain;
+namespace App\Shared\Domain\Event;
 
 trait DomainEventAwareTrait
 {
+    /**
+     * @var DomainEvent[]
+     */
     private array $domainEvents = [];
 
     /**

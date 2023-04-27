@@ -6,7 +6,7 @@ namespace App\Example\Domain\Example\Event;
 
 use App\Example\Domain\Example\ExampleId;
 use App\Example\Domain\Example\ExampleName;
-use App\Shared\Domain\DomainEvent;
+use App\Shared\Domain\Event\DomainEvent;
 
 final readonly class ExampleCreatedEvent extends DomainEvent
 {

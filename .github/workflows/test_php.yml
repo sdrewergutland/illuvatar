@@ -30,7 +30,7 @@ jobs:
                 with:
                     version: 2
                     php_version: 8.2
-                    php_extensions: bz2 exif gd mysqli zip opcache intl
+                    php_extensions: bz2 zip
                     progress: yes
                     working_dir: './.dev/tools/php-cs-fixer/'
 
@@ -50,6 +50,7 @@ jobs:
                 with:
                     version: 2
                     php_version: 8.2
+                    php_extensions: bz2 zip
                     progress: yes
 
             -   name: Start stack

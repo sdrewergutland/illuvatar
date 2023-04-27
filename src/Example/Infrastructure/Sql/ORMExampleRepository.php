@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Example\Infrastructure\Sql;
 
 use App\Example\Domain\Example\Example;
+use App\Example\Domain\Example\ExampleId;
 use App\Example\Domain\Example\ExampleNotFoundException;
 use App\Example\Domain\Example\ExampleRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Uid\Uuid;
 
 /**
  * @extends ServiceEntityRepository<Example>
  */
-class ORMExampleRepository extends ServiceEntityRepository implements ExampleRepository
+final class ORMExampleRepository extends ServiceEntityRepository implements ExampleRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -27,9 +27,9 @@ class ORMExampleRepository extends ServiceEntityRepository implements ExampleRep
         $this->getEntityManager()->flush();
     }
 
-    public function mustFindOneById(Uuid $id): Example
+    public function mustFindOneById(ExampleId $id): Example
     {
-        $example = $this->find($id);
+        $example = $this->find($id->value());
         if (!$example instanceof Example) {
             throw ExampleNotFoundException::fromId($id);
         }
@@ -37,8 +37,8 @@ class ORMExampleRepository extends ServiceEntityRepository implements ExampleRep
         return $example;
     }
 
-    public function findOneById(Uuid $id): ?Example
+    public function findOneById(ExampleId $id): ?Example
     {
-        return $this->find($id);
+        return $this->find($id->value());
     }
 }

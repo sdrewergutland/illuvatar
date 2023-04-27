@@ -4,10 +4,10 @@ namespace App\Example\Infrastructure\WebApi\Controller;
 
 use App\Example\Application\ExampleApplicationInterface;
 use App\Example\Application\UseCase\ReadExampleQuery\ReadExampleQuery;
+use App\Example\Domain\Example\ExampleId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Uid\Uuid;
 
 class ReadExample extends AbstractController
 {
@@ -23,7 +23,7 @@ class ReadExample extends AbstractController
         return $this->json(
             $exampleApplication->readExample(
                 new ReadExampleQuery(
-                    Uuid::fromString($exampleId)
+                    ExampleId::fromString($exampleId)
                 )
             )
         );

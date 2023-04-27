@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\FunctionalSuite\Example\Infrastructure\Sql;
 
 use App\Example\Domain\Example\Example;
+use App\Example\Domain\Example\ExampleId;
 use App\Example\Domain\Example\ExampleName;
 use App\Example\Domain\Example\ExampleNotFoundException;
 use App\Example\Domain\Example\ExampleRepository;
@@ -14,7 +15,6 @@ use App\Tests\Library\Extension\SetupAwareTrait;
 use App\Tests\Library\FunctionalTestCase;
 use App\Tests\Resources\Fixture\Example\AnotherExampleFixture;
 use App\Tests\Resources\Fixture\Example\ExampleFixture;
-use Symfony\Component\Uid\Uuid;
 
 /**
  * @coversDefaultClass \App\Example\Infrastructure\Sql\ORMExampleRepository
@@ -66,7 +66,7 @@ class OrmExampleRepositoryTest extends FunctionalTestCase
     public function itSavesAndFindsEntities(): void
     {
         $entity = new Example(
-            id: Uuid::v4(),
+            id: ExampleId::random(),
             name: ExampleName::fromString('Example name')
         );
 
@@ -86,6 +86,6 @@ class OrmExampleRepositoryTest extends FunctionalTestCase
     public function itThrowsExceptionOnNonExistingEntity(): void
     {
         $this->expectException(ExampleNotFoundException::class);
-        $this->subject->mustFindOneById(Uuid::v4());
+        $this->subject->mustFindOneById(ExampleId::random());
     }
 }

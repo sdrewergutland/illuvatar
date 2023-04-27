@@ -22,6 +22,7 @@ class SymfonyCommandBusIntegrationTest extends FunctionalTestCase
     protected function setUp(): void
     {
         $command = self::getContainer()->get('console.command.messenger_debug');
+        assert(is_object($command));
         $r = new \ReflectionObject($command);
         $p = $r->getProperty('mapping');
         $p->setAccessible(true);

@@ -6,20 +6,20 @@ use App\Shared\Application\Command\Command;
 use App\Shared\Application\Command\CommandBusInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class SymfonyCommandBus implements CommandBusInterface
+final readonly class SymfonyCommandBus implements CommandBusInterface
 {
     public function __construct(
-        private readonly MessageBusInterface $commandBus,
+        private MessageBusInterface $commandBus,
     ) {
     }
 
-    public function dispatch(Command|array $commands): void
+    public function dispatch(Command|array $domainEvents): void
     {
-        if (!is_array($commands)) {
-            $commands = [$commands];
+        if (!is_array($domainEvents)) {
+            $domainEvents = [$domainEvents];
         }
 
-        foreach ($commands as $command) {
+        foreach ($domainEvents as $command) {
             $this->commandBus->dispatch($command);
         }
     }

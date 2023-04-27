@@ -5,7 +5,7 @@ namespace App\Shared\Application\Command;
 interface CommandBusInterface
 {
     /**
-     * @param Command|Command[] $commands
+     * @param Command|Command[] $domainEvents
      */
-    public function dispatch(Command|array $commands): void;
+    public function dispatch(Command|array $domainEvents): void;
 }

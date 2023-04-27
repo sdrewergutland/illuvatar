@@ -6,6 +6,15 @@
         "version": "1.0.0"
     },
     "paths": {
+        "\/example\/example": {
+            "post": {
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        },
         "\/example\/example\/{exampleId}": {
             "get": {
                 "parameters": [

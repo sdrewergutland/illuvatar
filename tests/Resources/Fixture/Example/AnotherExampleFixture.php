@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Tests\Resources\Fixture\Example;
 
 use App\Example\Domain\Example\Example as SubjectEntity;
+use App\Example\Domain\Example\ExampleId;
 use App\Example\Domain\Example\ExampleName;
 use App\Tests\Library\Extension\Fixture\DependentFixtureInterface;
 use App\Tests\Library\Extension\Fixture\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Uid\UuidV4;
 
 final class AnotherExampleFixture extends Fixture implements DependentFixtureInterface
 {
@@ -21,8 +21,8 @@ final class AnotherExampleFixture extends Fixture implements DependentFixtureInt
     public function load(): void
     {
         $subjectEntity = new SubjectEntity(
-            UuidV4::v4(),
-            new ExampleName(__CLASS__)
+            ExampleId::random(),
+            ExampleName::fromString(__CLASS__)
         );
 
         $this->manager->persist($subjectEntity);

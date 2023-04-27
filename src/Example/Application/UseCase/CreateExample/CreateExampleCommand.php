@@ -2,16 +2,17 @@
 
 namespace App\Example\Application\UseCase\CreateExample;
 
+use App\Example\Domain\Example\ExampleName;
 use App\Shared\Application\Command\Command;
 
-readonly class CreateExampleCommand implements Command
+final readonly class CreateExampleCommand implements Command
 {
     public function __construct(
-        private string $name,
+        private ExampleName $name,
     ) {
     }
 
-    public function getName(): string
+    public function getName(): ExampleName
     {
         return $this->name;
     }

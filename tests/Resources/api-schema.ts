@@ -5,6 +5,13 @@
 
 
 export type paths = {
+  "/example/example": {
+    post: {
+      responses: {
+        default: never;
+      };
+    };
+  };
   "/example/example/{exampleId}": {
     get: {
       parameters: {

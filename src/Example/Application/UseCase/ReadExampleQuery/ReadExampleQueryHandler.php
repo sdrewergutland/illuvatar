@@ -8,10 +8,10 @@ use App\Example\Domain\Example\Example;
 use App\Example\Domain\Example\ExampleRepository;
 use App\Shared\Application\Query\QueryHandler;
 
-final class ReadExampleQueryHandler implements QueryHandler
+final readonly class ReadExampleQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly ExampleRepository $exampleRepository,
+        private ExampleRepository $exampleRepository,
     ) {
     }
 

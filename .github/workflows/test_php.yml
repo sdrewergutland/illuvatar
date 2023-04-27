@@ -16,10 +16,28 @@ jobs:
         steps:
             -   uses: actions/checkout@v3
                 
-            -   name: Validate composer.json and composer.lock
+            -   name: Cache Composer packages for phpcsfixer
+                id: composer-cache
+                uses: actions/cache@v3
+                with:
+                    path: './.dev/tools/php-cs-fixer/vendor'
+                    key: ${{ runner.os }}-php-${{ hashFiles('./.dev/tools/php-cs-fixer/composer.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-tools-php-cs-fixer
+
+            -   name: Install dependencies for phpcsfixer
+                uses: php-actions/composer@v6
+                with:
+                    version: 2
+                    php_version: 8.2
+                    php_extensions: bz2 zip
+                    progress: yes
+                    working_dir: './.dev/tools/php-cs-fixer/'
+
+            -   name: Validate main composer.json and composer.lock
                 run: composer validate --strict
                 
-            -   name: Cache Composer vendor files
+            -   name: Cache main composer vendor files
                 uses: actions/cache@v3
                 with:
                     path: './vendor'
@@ -27,16 +45,21 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php
 
-            -   name: Install dependencies
+            -   name: Install main dependencies
                 uses: php-actions/composer@v6
                 with:
                     version: 2
                     php_version: 8.2
+                    php_extensions: bz2 zip
                     progress: yes
 
             -   name: Start stack
                 run: |
                     docker-compose --env-file .docker.env -f docker-compose.ci.yaml up -d
+                    
+            -   name: Run php-cs-fixer
+                run: |
+                    docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run -vvv
                     
             -   name: Clear cache for container generation
                 run: |
@@ -53,31 +76,4 @@ jobs:
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpstan analyse --memory-limit 1G -c phpstan.neon src tests
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/psalm
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpmd src github phpmd-ruleset.xml
-                    
-    test-static-cs-fixer:
-        if: ${{ false }}  # disable for now
-        runs-on: ubuntu-latest
-        
-        steps:
-            -   uses: actions/checkout@v3
-
-            -   name: Cache Composer packages
-                id: composer-cache
-                uses: actions/cache@v3
-                with:
-                    path: './.dev/tools/php-cs-fixer/vendor'
-                    key: ${{ runner.os }}-php-${{ hashFiles('./.dev/tools/php-cs-fixer/composer.lock') }}
-                    restore-keys: |
-                        ${{ runner.os }}-php-tools-php-cs-fixer
-
-            -   name: Install dependencies
-                uses: php-actions/composer@v6
-                with:
-                    version: 2
-                    php_version: 8.2
-                    php_extensions: bz2 exif gd mysqli zip opcache intl
-                    progress: yes
-                    working_dir: './.dev/tools/php-cs-fixer/'
-
-            -   name: Run php-cs-fixer
-                run: ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
+            

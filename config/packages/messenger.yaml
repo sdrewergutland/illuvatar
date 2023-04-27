@@ -1,9 +1,16 @@
 framework:
     messenger:
+        default_bus: application.command.bus
         buses:
             application.command.bus:
-                default_middleware: true
-                middleware:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: false
+            domain.event.bus:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: true
+                
         transports:
             shared_messenger_transport.default:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'

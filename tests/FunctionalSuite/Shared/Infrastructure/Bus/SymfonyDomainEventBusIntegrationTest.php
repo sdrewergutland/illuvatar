@@ -2,8 +2,9 @@
 
 namespace App\Tests\FunctionalSuite\Shared\Infrastructure\Bus;
 
-use App\Shared\Application\Command\Heartbeat\HeartbeatCommand;
-use App\Shared\Application\Command\Heartbeat\HeartbeatCommandHandler;
+use App\Example\Application\EventSubscriber\DoAnotherThingOnExampleCreated;
+use App\Example\Application\EventSubscriber\DoOneThingOnExampleCreated;
+use App\Example\Domain\Example\Event\ExampleCreatedEvent;
 use App\Tests\Library\FunctionalTestCase;
 
 /**
@@ -11,7 +12,7 @@ use App\Tests\Library\FunctionalTestCase;
  *
  * @coversNothing
  */
-class SymfonyCommandBusIntegrationTest extends FunctionalTestCase
+class SymfonyDomainEventBusIntegrationTest extends FunctionalTestCase
 {
     /**
      * @var array<string, array<array<string>>>
@@ -35,7 +36,7 @@ class SymfonyCommandBusIntegrationTest extends FunctionalTestCase
      */
     public function handlersCountIsNotChanged(): void
     {
-        $this->assertCount(1, $this->mapping['application.command.bus']);
+        $this->assertCount(1, $this->mapping['domain.event.bus']);
     }
 
     /**
@@ -61,16 +62,17 @@ class SymfonyCommandBusIntegrationTest extends FunctionalTestCase
             }
         }
 
-        $this->assertTrue($isCorrectlySubscribed, sprintf('Message %s is not registered in bus %s', $messageIdentifier, $bus));
+        $this->assertTrue($isCorrectlySubscribed, sprintf('Event %s is not registered in bus %s', $messageIdentifier, $bus));
     }
 
     public function messages(): \Generator
     {
         yield [
-            'bus'     => 'application.command.bus',
-            'message' => HeartbeatCommand::class,
+            'bus'     => 'domain.event.bus',
+            'message' => ExampleCreatedEvent::class,
             'handler' => [
-                HeartbeatCommandHandler::class,
+                DoAnotherThingOnExampleCreated::class,
+                DoOneThingOnExampleCreated::class,
             ],
         ];
     }

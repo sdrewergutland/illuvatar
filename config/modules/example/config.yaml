@@ -28,3 +28,6 @@ services:
     
     App\Example\Infrastructure\Sql\ORMExampleRepository: ~
     App\Example\Domain\Example\ExampleRepository: '@App\Example\Infrastructure\Sql\ORMExampleRepository'
+    
+    App\Example\Application\EventSubscriber\:
+        resource: '../../../src/Example/Application/EventSubscriber'

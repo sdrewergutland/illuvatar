@@ -75,11 +75,4 @@ jobs:
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpstan analyse --memory-limit 1G -c phpstan.neon src tests
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/psalm
                     docker exec -w /var/www/html --env-file .docker.env ${{ vars.DOCKER_PHP_CONTAINER_NAME }} ./vendor/bin/phpmd src github phpmd-ruleset.xml
-                    
-    test-static-cs-fixer:
-        runs-on: ubuntu-latest
-        
-        steps:
-            -   uses: actions/checkout@v3
-
             

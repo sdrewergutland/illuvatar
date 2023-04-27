@@ -79,4 +79,4 @@ jobs:
                     working_dir: './.dev/tools/php-cs-fixer/'
 
             -   name: Run php-cs-fixer
-                run: ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run
+                run: ./.dev/tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --path-mode=override --config=php-cs-fixer.php --dry-run -vvv

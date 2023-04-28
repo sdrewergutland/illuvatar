@@ -37,7 +37,7 @@ final class CreateExampleTest extends ApplicationTestCase
         $this->assertResponseIsSuccessful();
         $this->assertResponseHeaderSame('Content-Type', 'application/json');
 
-        $this->assertMatchesOpenApiSpecification(
+        $this->assertOpenApiSpecificationMatches(
             request: $client->getRequest(),
             response: $client->getResponse(),
         );

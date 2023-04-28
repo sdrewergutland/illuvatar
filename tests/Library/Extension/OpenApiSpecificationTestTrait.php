@@ -23,7 +23,7 @@ trait OpenApiSpecificationTestTrait
     abstract private static function getContainer(): ContainerInterface;
 
     // @todo: split request and response validation?
-    public static function assertMatchesOpenApiSpecification(Request $request, Response $response): void
+    public static function assertOpenApiSpecificationMatches(Request $request, Response $response): void
     {
         $specsFilePath = self::getContainer()->getParameter('app.shared.infrastructure.api_specifications_file_path');
         \assert(is_string($specsFilePath) && !empty($specsFilePath), 'OpenAPI specification file path is not a string or is empty');

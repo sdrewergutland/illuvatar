@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
 
-use Symfony\Component\Uid\Uuid as SymfonyUuid;
+use Symfony\Component\Uid\UuidV7 as SymfonyUuid;
 
 abstract readonly class Uuid implements \Stringable, \JsonSerializable
 {

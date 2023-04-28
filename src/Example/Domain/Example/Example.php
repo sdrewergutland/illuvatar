@@ -6,7 +6,7 @@ use App\Example\Domain\Example\Event\ExampleCreatedEvent;
 use App\Example\Infrastructure\Sql\Type\ExampleNameType;
 use App\Shared\Domain\Event\DomainEventAwareTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV7;
 
 #[ORM\Entity, ORM\Table(name: 'example')]
 class Example
@@ -14,7 +14,7 @@ class Example
     use DomainEventAwareTrait;
 
     #[ORM\Id, ORM\Column(type: 'uuid', unique: true)]
-    private readonly Uuid $id;
+    private readonly UuidV7 $id;
 
     #[ORM\Column(type: ExampleNameType::TYPE, length: 255)]
     private ExampleName $name;
